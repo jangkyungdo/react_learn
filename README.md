@@ -1,68 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-learn
 
-## Available Scripts
+## 리액트란
 
-In the project directory, you can run:
+> 페이스북에서 개발한 자바스크립트 라이브러리이다.  
+> 다른 프레임워크와 달리 **오직 View만 신경 쓰는 라이브러리이다**.
 
-### `npm start`
+## 리액트의 특징
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Virtual DOM  
+    DOM(Document Object Model)에 직접 접근하지 않고 View에 변화만 적용하는 DOM의 사본이다.
+   > DOM에 직접 접근하여 변화를 주면 성능 이슈가 조금씩 발생한다. (느려진다.)
+   >
+   > **구체적인 성능 이슈** : 변화가 생기면 웹 브라우저가 CSS를 다시 연산하고, 레이아웃을 구성하고, 페이지를 렌더링하는 과정으로 인해 느려진다.
+   >
+   > **리액트에서 Virtual DOM으로 인한 View 변화 과정**
+   >
+   > 1. 데이터를 업데이트하면 전체 UI를 Virtual DOM에 리렌더링한다.
+   > 2. 이전 Virtual DOM에 있던 내용과 현재 내용을 비교한다.
+   > 3. 바뀐 부분만 실제 DOM에 적용한다.
+2. 라이브러리이다.  
+   View만을 신경 쓴 라이브러리이기 때문에 AJAX, 라우팅 등등 다른 기능은 직접 구현해야된다.  
+   자신의 취향대로 스택을 설정할 수 있다.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 리액트를 사용해야 되는 이유
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Virtual DOM 방식을 사용하여 DOM 업데이트 처리 횟수를 최소화하고 효율적으로 상태를 관리할 수 있다.
+2. UI를 업데이트하는 과정에서 생기는 복잡함을 해소 시켜주는 업데이트 처리 간결성.
