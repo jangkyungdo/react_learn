@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 리액트 이벤트 시스템
 
-## Available Scripts
+> 이벤트란 사용자가 웹 브라우저에서 DOM 요소들과 상호작용 하는 것을 말한다.
 
-In the project directory, you can run:
+## 리액트 이벤트 사용 주의사항
 
-### `npm start`
+1. 이벤트 이름은 카멜 표기법으로 작성해야된다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 즉, onclick을 onClick으로 작성해야지 error가 발생하지 않는다.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. 함수 형태로 값을 전달한다.
 
-### `npm test`
+- JSX에 화살표 함수로 작성해도 되고, 렌더링 부분 외부에 작성해도된다.
+  - 렌더링 외부에 작성하는것이 가독성이 높다.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. DOM 요소에만 이벤트를 설정할 수 있다.
 
-### `npm run build`
+- input, button, div 등 DOM 요소에 이벤트를 설정할 수 있지만 컴포넌트에는 이벤트를 설정할 수 없다.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 이벤트 종류
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+> [리액트 매뉴얼 참고](https://reactjs.org/docs/events.html#touch-events)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 공부를 통해 배운 지식
 
-### `npm run eject`
+> 1. event 객체는 SyntheticEvent(합성 이벤트)로 웹 브라우저의 네이티브 이벤트를 감싸는 객체이다.
+>    SyntheticEvent(합성 이벤트)는 이벤트가 끝나고 나면 이벤트가 초기화 되기 때문에 정보를 참조할 수 없다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**주로 input 요소에 onChange 이벤트로 실시간으로 값을 바꿀때 많이 사용된다.**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> 2. class형 컴포넌트에서 JSX에 이벤트를 등록할 경우  
+>    **이벤트 메소드가 특정 HTML 요소의 이벤트로 등록되는 과정에서 메소드와 this의 관계가 끊어진다.**
+>
+> 그렇기 때문에 이벤트 메소드를 bind(this)하거나 이벤트 메소드를 화살표 함수로 정의해야 된다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+constructor(props) {
+  super(props);
+  this.이벤트 함수명 = this.이벤트 함수명.bind(this);
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+handleClick = (e) => {
+    this.setState({
+        value: e.target.value
+        });
+}
+```

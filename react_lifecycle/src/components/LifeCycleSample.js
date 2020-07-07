@@ -14,20 +14,24 @@ class LifeCycleSample extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    // props로 받은 값(nextProps)을 state(prevState)에 동기화 하는 용도이다.
     console.log("getDerivedStateFromProps");
     if (nextProps.color !== prevState.color) {
+      // 조건에 따른 특정 값 동기화
       return { color: nextProps.color };
     }
     return null;
   }
 
   componentDidMount() {
+    // 주로 네트워크 요청이나 setInterval, setTimeout, 비동기작업을 처리한다.
     console.log("componentDidMount");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    // 리렌더링 여부를 결정하는 메소드
     console.log("shouldComponentUpdate", nextProps, nextState);
-    return nextState.number % 10 !== 4;
+    return nextState.number % 10 !== 4; // number 나머지에 4가 들어가면 false
   }
 
   componentWillUnmount() {

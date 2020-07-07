@@ -58,6 +58,7 @@
 1. class형 컴포넌트 state
 
 - constructor(props) 메소드를 이용한 state
+- **class형 컴포넌트에서 state를 조회할때는 this.state라고 명시해야된다.**
 
 ```
 class test extends Component {
