@@ -1,68 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sass
 
-## Available Scripts
+## Sass란
 
-In the project directory, you can run:
+> Sass(Syntactically Awesome Style Sheets)는 CSS 전처리기로 복잡한 작업을 쉽게 할 수 있게 해주며, 재활용성 및 가독성을 높여 유지보수를 쉽게 할 수 있게 도와준다.
 
-### `npm start`
+- create-react-app v2에서는 별도의 추가 설정없이 사용 가능하다. ( 구버전은 설정이 필요 )
+- Sass에서는 두 가지 확장자를 지원한다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. .scss
+2. .sass
+   > 차이점 : .sass에서는 중괄호({})와 세미콜론(;)을 사용하지 않고 .scss에서는 사용한다.  
+   > 즉, .scss의 문법이 기존 CSS 작성 방식과 비슷하다.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 사용방법
 
-### `npm test`
+1. node_sass 모듈을 설치한다.
+   > 이 라이브러리는 sass를 CSS로 변환시켜준다.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install node_sass
+yarn add node_sass
+```
 
-### `npm run build`
+## 특징
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. 변수 사용
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+   > \$를 사용하여 변수를 설정할 수 있다.
+   > 선언한 Selector(선택자)에서만 접근 가능하다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Nesting(중첩)
+   > 매우 중요한 개념으로 선언을 중첩시킬 수 있다.  
+   > 이러한 방식은 가독성 및 유지보수에 효과적이다.
 
-### `npm run eject`
+```
+.container {
+    width: 100%;
+    h1 {
+        color: red;
+    }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> 부모 Selector(선택자)를 참조할땐 **&** 문자를 사용한다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+.container {
+    width: 100%;
+    h1 {
+        color: red;
+    }
+    &:hover {
+        width: 50%
+    }
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. @import(불러오기)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   > **@** 문자를 import에 붙여 다른 파일을 불러오는 기능을 사용할 수 있다.
 
-## Learn More
+5. Mixin(믹스인)
+   > 재사용되는 스타일 블록을 함수처럼 사용하는 기능이다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- mixin을 선언하는 방법
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+@mixin test ($color, $size) {
+    $calculated: 32px * $size
+  color: $color;
+  width: $calculated;
+  height: $calculated;
+}
+```
 
-### Code Splitting
+- mixin을 사용하는 방법
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+@include test(blue, 1);
+```
