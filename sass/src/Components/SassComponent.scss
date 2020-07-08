@@ -3,6 +3,10 @@
 .SassComponent {
   // 전체 컴포넌트 박스
   display: flex;
+  background: $oc-gray-2;
+  @include media("<768px") {
+    background: $oc-gray-9;
+  }
   .box {
     // CSS로 치면 .SassComponent .box 이런식
     cursor: pointer;
