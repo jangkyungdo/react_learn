@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Todo-App
 
-## Available Scripts
+> 리액트의 이해를 높이기 위한 클론코딩  
+> 함수형 컴포넌트로 Hooks를 사용하여 만들기
 
-In the project directory, you can run:
+## UI 컴포넌트 구성하기
 
-### `npm start`
+1. TodoTemplate 컴포넌트 : UI의 전체적인 틀을 만드는 컴포넌트, children으로 내부 JSX를 props로 받아와서 렌더링한다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   > - children이란 컴포넌트 태그 사이 내용을 보여주는 props이다.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. TodoInsert 컴포넌트 : 새로운 항목을 입력하고 추가하는 컴포넌트, input의 state를 관리한다.
 
-### `npm test`
+3. TodoList 컴포넌트 : todo 배열을 props로 받아와서 배열 함수인 map함수를 이용해 여러개의 TodoListItem 컴포넌트를 반환한다.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. TodoListItem 컴포넌트 : 할 일에 대한 정보(state)를 렌더링하는 컴포넌트, todo 배열을 props로 받아와서 state에 따른 UI를 렌더링한다.
 
-### `npm run build`
+## 기능의 흐름
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> TodoLIst에 대한 기능과 상태를 모두 최상위 컴포넌트인 App.js에서 관리한다.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- App.js에서 모든 상태를 관리하는 이유는 : todo 객체와 기능들을 하위 컴포넌트에 props로 내려주고 하위 컴포넌트는 자신이 필요한 기능과 상태만 props로 받아서 사용하면 되기 때문에
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 최상위 컴포넌트인 App.js 에서 필요한 기능인 함수를 정의하고 props로 하위 컴포넌트에 내려준다.
 
-### `npm run eject`
+2. 하위 컴포넌트는 이벤트(동작)를 설정하여 해당 이벤트(동작)가 발생했을 때 props로 받은 함수를 호출시킨다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+ App.js
+    ↓
+TodoTemplate
+    ↓
+TodoInsert, TodoList
+                ↓
+            TodoListItem
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 항목 추가 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> 객체를 만들어서 todo 객체에 concat메소드를 사용하여 새로운 값을 상태로 설정한다.  
+> push 함수는 기존 배열 자체를 변경하지만, concat은 새로운 배열을 만들어주는 차이점이 있다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+리액트에서 상태를 업데이트할 때는 기존 상태를 그대로 두면서 새로운 값을 상태로 설정해야한다. 이를 불변성 유지이라고 한다.
 
-## Learn More
+### 항목 삭제 기능
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> filter 함수를 사용하여 특정조건에 맞는 배열을 생성하여 todo 객체를 재구성한다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### useCallback을 이용하여 성능 올리기
 
-### Code Splitting
+> 컴포넌트가 리렌더링 될 때마다 이벤트 함수를 생성한다. 이 부분을 최적화 하기위해 useCallback Hook을 사용하여 **이벤트 핸들러 함수를 필요할 때만 생성한다.**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### 사용한 라이브러리
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. react-icons
+2. classnames
+3. node-sass

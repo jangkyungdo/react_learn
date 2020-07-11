@@ -31,7 +31,10 @@ const App = () => {
         text,
         checked: false,
       };
+      console.log(todos);
+      console.log(todo);
       setTodos(todos.concat(todo));
+      console.log(todos);
       nextId.current += 1;
     },
     [todos],
