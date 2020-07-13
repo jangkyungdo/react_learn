@@ -15,6 +15,7 @@ function createBlukTodos() {
   return array;
 }
 
+// useReducer를 사용하여 불필요한 함수 생성 방지
 function todoReducer(todos, action) {
   switch (action.type) {
     case 'INSERT':
@@ -31,7 +32,6 @@ function todoReducer(todos, action) {
   }
 }
 const App = () => {
-  // useReducer를 사용하여 성능 최적화
   const [todos, dispatch] = useReducer(todoReducer, undefined, createBlukTodos);
   //컴포넌트가 맨 처음 렌더링될 때만 createBlukTodos 함수가 호출되도록 세번째 파라미터에 초기상태
   // const [todos, setTodos] = useState(createBlukTodos);
@@ -47,6 +47,7 @@ const App = () => {
     console.log(todos);
     console.log(todo);
     dispatch({ type: 'INSERT', todo });
+    // 함수형 업데이트를 사용한 불필요한 함수 생성 방지
     // setTodos((todos) => todos.concat(todo));
     console.log(todos);
     nextId.current += 1;

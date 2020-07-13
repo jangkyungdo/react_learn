@@ -35,7 +35,7 @@ TodoInsert, TodoList
             TodoListItem
 ```
 
-## 성능 최적화
+## 컴포넌트 성능 최적화
 
 > **성능 최적화란** 리렌더링이 불필요할 때는 리렌더링을 방지해는것이다.
 >
@@ -49,7 +49,7 @@ TodoInsert, TodoList
 3. 부모 컴포넌트가 리렌더링될 때
 4. forceUpdate 함수가 실행될 때
 
-### React.memo를 사용하여 성능 최적화
+### React.memo를 사용하여 컴포넌트 성능 최적화
 
 > 컴포넌트의 props가 바뀌지 않았다면, 리렌더링하지 않도록 설정하여 함수형 컴포넌트의 리렌더링 성능을 최적화할 수 있다.
 
@@ -63,6 +63,39 @@ const TodoListItem = ({ todo, onRemove}) => {
     ...
 }
 export default React.memo(TodolistItem);
+```
+
+여기서 onRemove가 todo 참조하고 있기 때문에 todo가 업데이트 된다면 onRemove 함수는 계속 생성될 것이다. **함수가 계속 만들어지는 상황을 방지하기 위해서는 다음과 같은 방법을 사용해야된다.**
+
+1. useState의 함수형 업데이트
+
+- 세터함수를 사용할 때 새로운 상태를 파라미터로 넣는 대신, 상태 업데이트를 어떻게 할지 정의 해주는 업데이트 함수를 넣는다.
+- useCallback으로 감싸져있다면 두번째 파라미터인 배열을 빈 배열로 한다.
+
+```
+setTodos(todos.filter(todo => todo.id !== id));
+        ↓ // 이러한 식으로
+setTodos(todos => todos.filter(todo => todo.id !== id));
+```
+
+2. useReducer 사용한다.
+
+- 기존 코드를 많이 고쳐야되지만 상태를 업데이트하는 로직을 모아서 컴포넌트 바깥에 쓸수있다.
+
+### 불변성
+
+> 리액트 컴포넌트에서상태를 업데이트할 때는 기존 상태를 그대로 두면서 새로운 값을 상태로 설정해야한다. 이를 불변성 유지이라고 한다.
+
+- 전개 연산자(...)와 배열의 내장함수를 많이 이용한다.
+- 전개 연산자를 이용해 객체를 복사하여 필요한 부분을 교체해주는 방식
+
+```
+const onClick = useCallback(
+    id => {
+         setTodos(todos.map(todo =>
+         todo.id === id ? { ...todo, checked: !todo.checked } : todo),
+    );
+}, [todos]);
 ```
 
 ### useCallback을 이용하여 성능 최적화
@@ -81,8 +114,6 @@ const onInsert = useCallback(() => {
 
 > 객체를 만들어서 todo 객체에 concat메소드를 사용하여 새로운 값을 상태로 설정한다.  
 > push 함수는 기존 배열 자체를 변경하지만, concat은 새로운 배열을 만들어주는 차이점이 있다.
-
-리액트에서 상태를 업데이트할 때는 기존 상태를 그대로 두면서 새로운 값을 상태로 설정해야한다. 이를 불변성 유지이라고 한다.
 
 ### 항목 삭제 기능
 
