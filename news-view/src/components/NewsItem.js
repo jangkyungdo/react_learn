@@ -2,38 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NesItemBlock = styled.div`
-display: flex;
+  display: flex;
 
-.thumbnail {
+  .thumbnail {
     margin-right: block;
     img {
-        display: block;
-        width: 160px;
-        height: 100px
-        object-fit: cover;
+      display: block;
+      width: 160px;
+      height: 100px;
+      object-fit: cover;
     }
-}
-.contents {
+  }
+  .contents {
     h2 {
-        margin:0;
-        a {
-            color: black;
-        }
+      margin: 0;
+      a {
+        color: black;
+      }
     }
-}
+  }
 
-p {
+  p {
     margin: 0;
-    line-height:1.5;
-    margin-top: 0.5rem
+    line-height: 1.5;
+    margin-top: 0.5rem;
     white-space: normal;
-}
-& + & {
-    margin-top : 3rem
-}
+  }
+  & + & {
+    margin-top: 3rem;
+  }
 `;
 
-const NewItem = ({ article }) => {
+const NewsItem = ({ article }) => {
   const { title, description, url, urlToImage } = article;
   return (
     <NesItemBlock>
@@ -56,4 +56,4 @@ const NewItem = ({ article }) => {
   );
 };
 
-export default NewItem;
+export default NewsItem;

@@ -12,3 +12,5 @@ const NewsPage = ({ match }) => {
     </Fragment>
   );
 };
+
+export default NewsPage;

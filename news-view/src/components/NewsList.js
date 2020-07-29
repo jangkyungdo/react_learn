@@ -19,23 +19,24 @@ const NewsListBlock = styled.div`
 const NewsList = ({ category }) => {
   const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
+  // 데이터를 받아오는 화면을 보여주기 위한 상태
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true); // 화면에 데이터를 불러오기 전에 화면을 출력
       try {
         const query = category === 'all' ? '' : `&category=${category}`;
         const response = await axios.get(
           `http://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=457f9df6b4874be9a69654e62350c128`,
         );
         setArticles(response.data.articles);
+        console.log(response.data);
       } catch (e) {
         console.log(e);
       }
       setLoading(false);
     };
-
-    fetchData(false);
+    fetchData();
   }, [category]);
 
   if (loading) {
@@ -43,6 +44,7 @@ const NewsList = ({ category }) => {
   }
 
   if (!articles) {
+    // 데이터 확인
     return null;
   }
 
