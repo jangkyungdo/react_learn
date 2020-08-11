@@ -7,7 +7,8 @@
 
 - createContext 함수
   > 새로운 Context를 만들 때는 createContext 함수를 사용하며 파라미터에는 기본상태를 지정한다.  
-  > 하지만 value 즉 파라미터에 함수를 전달할 수 도 있다.
+  > 하지만 value 즉 파라미터에 함수를 전달할 수 도 있다.  
+  > Consumer, Provider 컴포넌트를 반환한다.
 
 ```
 const TestContext = createContext({
@@ -18,7 +19,8 @@ const TestContext = createContext({
 ```
 
 - Consumer 컴포넌트
-  > Context에 있는 값을 사용할 때 사용하는 컴포넌트
+  > Context에 있는 값을 사용할 때 사용하는 컴포넌트  
+  > Render props 방식 - children 위치에 JSX와 문자열 대신 함수를 전달하는 것
 
 ```
 <TestContext.Consumer>
@@ -28,6 +30,7 @@ const TestContext = createContext({
 
 - Provider 컴포넌트
   > Context에 있는 값을 변경할 때 사용하는 컴포넌트  
+  > Context를 적용할려면 App.js에서 앱을 모두 감싸야된다.
   > value 값을 꼭 명시해 줘야된다.
 
 ```
