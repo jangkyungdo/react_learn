@@ -1,5 +1,4 @@
 import React from 'react';
-import todos from '../modules/todos';
 
 const TodoItem = ({ todo, onToggle, onRemove }) => {
   return (

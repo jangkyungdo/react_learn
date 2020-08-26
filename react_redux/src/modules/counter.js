@@ -1,4 +1,4 @@
-import { createAction, handleAction } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 
 // 액션
 const INCREASE = 'counter/INCREASE';
@@ -13,11 +13,9 @@ const initialState = {
   number: 0,
 };
 
-const counter = handleAction(
+const counter = handleActions(
   {
     [INCREASE]: (state, action) => ({ number: state.number + 1 }),
-  },
-  {
     [DECREASE]: (state, action) => ({ number: state.number - 1 }),
   },
   initialState,
